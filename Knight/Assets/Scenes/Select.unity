@@ -206,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 16090073}
+      - m_Target: {fileID: 16090068}
         m_TargetAssemblyTypeName: SceneLoadBtn, Assembly-CSharp
-        m_MethodName: StartClick
+        m_MethodName: 
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 16090068}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd584f49c5b6e7b43a14cd551b234611, type: 3}
+  m_Script: {fileID: 11500000, guid: 81b86eb5153900d438ab7bdbecd1aad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &18306846
@@ -432,15 +432,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 18306846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db365326e196d7745a52c2006c96bc1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 2
-  chars:
-  - {fileID: 280410315}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 1839099581}
+  character: 0
+  chars: []
 --- !u!1 &64805669
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,15 +855,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 280410309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db365326e196d7745a52c2006c96bc1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: 0
-  chars:
-  - {fileID: 280410315}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 1839099581}
+  chars: []
 --- !u!1 &424821894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1294,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 802192530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eebee2f2835a774aa48ee5735f42a70, type: 3}
+  m_Script: {fileID: 11500000, guid: f4511a24a63727645b81e7f8bbf8ba67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentCharacter: 0
@@ -1569,15 +1561,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222286463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db365326e196d7745a52c2006c96bc1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 1
-  chars:
-  - {fileID: 280410315}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 1839099581}
+  character: 0
+  chars: []
 --- !u!1 &1839099575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1742,15 +1730,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1839099575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db365326e196d7745a52c2006c96bc1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 3
-  chars:
-  - {fileID: 280410315}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 1839099581}
+  character: 0
+  chars: []
 --- !u!1 &1934532061
 GameObject:
   m_ObjectHideFlags: 0
