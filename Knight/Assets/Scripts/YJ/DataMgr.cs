@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 public enum Character
 {
-    Black, Blue, Green, Red
+    Black, Blue, Green, Player
 }
 public class DataMgr : MonoBehaviour
 {
@@ -15,5 +17,6 @@ public class DataMgr : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public Character currentCharacter;
+    public Character player1currentCharacter;
+    public Character player2currentCharacter;
 }
