@@ -311,7 +311,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: "1. \uC564 \uC801\uD30Cf"
+    path: "1. \uC564 \uD3C9\uD0C0f2"
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -341,7 +341,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: "1. \uC564 \uD3C9\uD0C0f2"
+    path: "1. \uC564 \uC801\uD30Cf2"
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -435,7 +435,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 1377808199
+      path: 3125434149
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -444,7 +444,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 3125434149
+      path: 4064245137
       attribute: 2086281974
       script: {fileID: 0}
       typeID: 1
@@ -1359,7 +1359,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: "1. \uC564 \uC801\uD30Cf"
+    path: "1. \uC564 \uD3C9\uD0C0f2"
     classID: 1
     script: {fileID: 0}
     flags: 16
@@ -1389,7 +1389,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_IsActive
-    path: "1. \uC564 \uD3C9\uD0C0f2"
+    path: "1. \uC564 \uC801\uD30Cf2"
     classID: 1
     script: {fileID: 0}
     flags: 16
