@@ -1,20 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class SelectChar : MonoBehaviour
 {
     public Character character;
-    public Image characterImage;
-    public Image Player2characterImage;
+    public Image Player1Image;
+    public Image Player2Image;
+    public Text Player1Text; // Player 1 텍스트
+    public Text Player2Text; // Player 2 텍스트
     Animator anim;
     SpriteRenderer sr;
     public SelectChar[] chars;
     private int[] currentIndex = new int[2];
     private bool[] isSelected = new bool[2];
+    private int[] selectedIndex = new int[2] { -1, -1 }; // 선택된 캐릭터 인덱스 저장
     private Sprite[][] characterSprites;
 
     void Start()
@@ -39,8 +41,12 @@ public class SelectChar : MonoBehaviour
             isSelected[i] = false;
         }
 
-        characterImage.gameObject.SetActive(false);
-        Player2characterImage.gameObject.SetActive(false);
+        // 텍스트 초기 위치 설정
+        UpdateText(Player1Text, 0);
+        UpdateText(Player2Text, 1);
+
+        // 초기 캐릭터 선택 상태 업데이트
+        UpdateCharacterSelection();
     }
 
     void Update()
@@ -57,16 +63,18 @@ public class SelectChar : MonoBehaviour
                         currentIndex[i]--;
                         if (currentIndex[i] < 0)
                             currentIndex[i] = chars.Length - 1;
-                        UpdateCharacterSelection(i);
+                        UpdateCharacterSelection();
                         UpdateCurrentCharacter(i);
+                        UpdateText(Player1Text, i);
                     }
                     else if (Input.GetKeyDown(KeyCode.D))
                     {
                         currentIndex[i]++;
                         if (currentIndex[i] >= chars.Length)
                             currentIndex[i] = 0;
-                        UpdateCharacterSelection(i);
+                        UpdateCharacterSelection();
                         UpdateCurrentCharacter(i);
+                        UpdateText(Player1Text, i);
                     }
                     else if (Input.GetKeyDown(KeyCode.J))
                     {
@@ -80,16 +88,18 @@ public class SelectChar : MonoBehaviour
                         currentIndex[i]--;
                         if (currentIndex[i] < 0)
                             currentIndex[i] = chars.Length - 1;
-                        UpdateCharacterSelection(i);
+                        UpdateCharacterSelection();
                         UpdateCurrentCharacter(i);
+                        UpdateText(Player2Text, i);
                     }
                     else if (Input.GetKeyDown(KeyCode.RightArrow))
                     {
                         currentIndex[i]++;
                         if (currentIndex[i] >= chars.Length)
                             currentIndex[i] = 0;
-                        UpdateCharacterSelection(i);
+                        UpdateCharacterSelection();
                         UpdateCurrentCharacter(i);
+                        UpdateText(Player2Text, i);
                     }
                     else if (Input.GetKeyDown(KeyCode.Keypad1))
                     {
@@ -100,14 +110,18 @@ public class SelectChar : MonoBehaviour
         }
     }
 
-    void UpdateCharacterSelection(int playerIndex)
+    void UpdateCharacterSelection()
     {
         for (int i = 0; i < chars.Length; i++)
         {
-            if (i == currentIndex[playerIndex])
+            if ((i == currentIndex[0] && !isSelected[0]) || (i == currentIndex[1] && !isSelected[1]))
+            {
                 chars[i].OnCurrent();
-            else
+            }
+            else if (i != selectedIndex[0] && i != selectedIndex[1])
+            {
                 chars[i].OnDeCurrent();
+            }
         }
     }
 
@@ -126,24 +140,17 @@ public class SelectChar : MonoBehaviour
     void SelectCurrentCharacter(int playerIndex)
     {
         isSelected[playerIndex] = true;
-        // 굳이 없어도 될만한 테스트용1
-        /*
-        for (int i = 0; i < chars.Length; i++)
-        {
-            if (i == currentIndex[playerIndex])
-                chars[i].anim.SetBool("run", true);
-            else
-                chars[i].anim.SetBool("run", false);
-        }*/
+        selectedIndex[playerIndex] = currentIndex[playerIndex]; // 선택된 캐릭터 인덱스 저장
+
         if (playerIndex == 0)
         {
-            characterImage.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
-            characterImage.gameObject.SetActive(true);
+            Player1Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
+            Player1Image.gameObject.SetActive(true);
         }
         else if (playerIndex == 1)
         {
-            Player2characterImage.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
-            Player2characterImage.gameObject.SetActive(true);
+            Player2Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
+            Player2Image.gameObject.SetActive(true);
         }
 
         // 두 명의 캐릭터가 모두 선택되었는지 확인
@@ -162,12 +169,15 @@ public class SelectChar : MonoBehaviour
     void OnDeCurrent()
     {
         sr.color = new Color(0.4f, 0.4f, 0.4f);
-        // anim.SetBool("run", false);
     }
 
     void OnCurrent()
     {
         sr.color = new Color(1f, 1f, 1f);
-        //anim.SetBool("run", false);
+    }
+
+    void UpdateText(Text text, int playerIndex)
+    {
+        text.transform.position = Camera.main.WorldToScreenPoint(chars[currentIndex[playerIndex]].transform.position);
     }
 }
