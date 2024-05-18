@@ -13,9 +13,8 @@
         private bool isDashing = false; // 대쉬 상태인지 확인하는 변수
 
         private bool isMoving = false; // 움직임 상태를 추적합니다.
-
         public float movePower = 1f;   //move 파워
-        public float jumpPower = 30f;       // 점프 파워 증가
+        public float jumpPower = 3000f;       // 점프 파워 증가
 
         private int jumpCount = 0; // 누적 점프 횟수
         private bool isGrounded = false; // 바닥에 닿았는지 나타냄
@@ -45,8 +44,8 @@
     // Update is called once per frame
     void Update()
     {
-        if (isDead)
-            return;
+        // 사망시 처리를 더 이상 진행하지 않고 종료
+        if (isDead) return;
 
         float h = Input.GetAxisRaw("Horizontal");
 
@@ -66,8 +65,21 @@
         // 점프 입력 처리
         if (Input.GetKeyDown(KeyCode.K) && jumpCount < maxJump)
         {
+            // 점프 횟수 증가
+            jumpCount++;
+            // 점프 직전에 속도를 순간적으로 제로(0, 0)로 변경
+            rigid.velocity = Vector2.zero;
+            // 리지드바디에 위쪽으로 힘을 주기
+            rigid.AddForce(new Vector2(0, jumpPower));
             isJumping = true;
             animator.SetBool("isJumping", true);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.K) && rigid.velocity.y > 0)
+        {
+            // 마우스 왼쪽 버튼에서 손을 떼는 순간 && 속도의 y 값이 양수라면 (위로 상승 중)
+            // 현재 속도를 절반으로 변경
+            rigid.velocity = rigid.velocity * 0.5f;
         }
 
         // 대쉬 입력 처리
@@ -76,18 +88,27 @@
             isDashing = true;
             animator.SetBool("isDashing", true);
         }
+        // 애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신
+        animator.SetBool("Grounded", isGrounded);
     }
     //Physics engine Updates
     void FixedUpdate()
     {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
         // 대쉬 로직
         if (isDashing)
             Dash();
         else
         {
             Move();
-            if (isJumping)
-                Jump();
+            //           if (isJumping)
+            //               Jump();
+            if (jumpCount > 0 && !animator.GetBool("isJumping"))
+            {
+                animator.SetBool("isJumping", false);
+                jumpCount = 0;
+            }
         }
     }
 
@@ -115,13 +136,14 @@
 
     void Jump()
     {
-        if ( jumpCount < maxJump) // 점프 로직
+        if ( isGrounded && jumpCount < maxJump)
         {
+            Debug.Log("Jumping");
 
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             jumpCount++;
-            isJumping = false;
-            animator.SetBool("isJumping", false);
+            isJumping = true;
+            animator.SetBool("isJumping", true);
             // 코루틴을 사용하여 점프 디바운싱
             StartCoroutine(ResetJump());
         }
@@ -131,12 +153,14 @@
         yield return new WaitForSeconds(0.1f); // 짧은 딜레이 후에 다시 점프를 허용
         isGrounded = false;
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.contacts[0].normal.y > 0.7f)
         {
+            // isGrounded를 true로 변경하고, 누적 점프 횟수를 0으로 리셋
             isGrounded = true;
             jumpCount = 0; // 바닥에 닿으면 점프 카운트 리셋
+            animator.SetBool("Grounded", true);
+            animator.SetBool("isJumping", false);
         }
     }
 
