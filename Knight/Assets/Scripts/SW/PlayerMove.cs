@@ -22,6 +22,9 @@
         private int maxJump = 2; // 최대 점프 횟수를 설정 (더블 점프)
         bool isJumping = false;
 
+        private bool isDefending = false; // 방어 상태를 나타내는 변수 추가
+
+
         private Rigidbody2D rigid;          // 사용할 리지드바디 컴포넌트
         private Animator animator;          // 사용할 애니메이터 컴포넌트
         private AudioSource playerAudio;     // 사용할 오디오 소스 컴포넌트
@@ -80,6 +83,20 @@
             // 마우스 왼쪽 버튼에서 손을 떼는 순간 && 속도의 y 값이 양수라면 (위로 상승 중)
             // 현재 속도를 절반으로 변경
             rigid.velocity = rigid.velocity * 0.5f;
+        }
+
+        // 방어 모션 처리
+        if (Input.GetKey(KeyCode.S))
+        {
+            if (!isDefending)
+            {
+                isDefending = true; // 방어 상태 활성화
+                animator.SetBool("isDefending", true);
+            }
+        } else if (isDefending)
+        {
+            isDefending = false; // 방어 상태 비활성화
+            animator.SetBool("isDefending", false);
         }
 
         // 대쉬 입력 처리
