@@ -1,4 +1,5 @@
-    using System.Collections;
+using System;
+using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
 
@@ -15,7 +16,8 @@
         private bool isMoving = false; // 움직임 상태를 추적합니다.
         public float movePower = 1f;   //move 파워
         public float jumpPower = 3000f;       // 점프 파워 증가
-
+        
+        //점프 로직
         private int jumpCount = 0; // 누적 점프 횟수
         private bool isGrounded = false; // 바닥에 닿았는지 나타냄
         private bool isDead = false; // 사망 상태
@@ -28,9 +30,15 @@
         private Rigidbody2D rigid;          // 사용할 리지드바디 컴포넌트
         private Animator animator;          // 사용할 애니메이터 컴포넌트
         private AudioSource playerAudio;     // 사용할 오디오 소스 컴포넌트
-        // Start is called before the first frame update
+                                             // Start is called before the first frame update
 
-        private void Start()
+        // 스킬 로직
+        public GameObject swordTrailEffect;  // 검귀 이펙트 프리팹
+        public Transform pos;
+        private bool isUsingSkill = false; // 스킬 사용 상태
+
+
+    private void Start()
         {
             // 게임 오브젝트로부터 사용할 컴포터들을 가져와 변수에 할당
             rigid = gameObject.GetComponent<Rigidbody2D>();
@@ -107,7 +115,14 @@
         }
         // 애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신
         animator.SetBool("Grounded", isGrounded);
+
+        // 스킬 사용 입력 처리
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            UseSkill();
+        }
     }
+
     //Physics engine Updates
     void FixedUpdate()
     {
@@ -180,7 +195,26 @@
             animator.SetBool("isJumping", false);
         }
     }
+    void UseSkill()
+    {
+        if (!isUsingSkill)  // 스킬을 이미 사용하고 있지 않은 경우에만 실행
+        {
+            isUsingSkill = true;
+            animator.SetBool("isUsingSkill", true);
 
+
+            // 스킬 종료 후 스킬 상태 리셋
+            StartCoroutine(ResetSkill());
+        }
+    }
+    IEnumerator ResetSkill()
+    {
+        yield return new WaitForSeconds(1); // 스킬 지속 시간 1초 가정
+        // Instantiate 매개 변수 원본 오브젝트, 생성위치, 회전
+        Instantiate(swordTrailEffect, transform.position, Quaternion.identity);  // 검귀 이펙트 생성
+        isUsingSkill = false;
+        animator.SetBool("isUsingSkill", false);
+    }
     void Dash()
     {
         if (isDashing)
