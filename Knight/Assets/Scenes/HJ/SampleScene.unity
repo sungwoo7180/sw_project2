@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 30409831}
   - component: {fileID: 30409830}
   - component: {fileID: 30409829}
+  - component: {fileID: 30409834}
   - component: {fileID: 30409832}
   - component: {fileID: 30409833}
-  - component: {fileID: 30409834}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -250,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 30409828}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.222, z: 0}
+  m_LocalPosition: {x: 0, y: 0.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -317,10 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e8bbfc6223b344991f0e91ed4483a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 3
-  jumpPower: 0
-  coolTime: 0.5
-  pos: {fileID: 0}
+  maxSpeed: 2
+  jumpPower: 4
+  coolTime: 1.5
+  pos: {fileID: 439632684}
   boxSize: {x: 0, y: 0}
 --- !u!1 &439632683
 GameObject:
@@ -414,7 +414,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 1.5047563
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -524,8 +524,8 @@ Transform:
   m_GameObject: {fileID: 1200270901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.031130224, y: -1.491, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: -0.031130224, y: -0.91, z: 0}
+  m_LocalScale: {x: 10, y: 1.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
