@@ -24,14 +24,29 @@ public class SelectChar : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
+        // characterSprites 배열 초기화
         characterSprites = new Sprite[chars.Length][];
 
         for (int i = 0; i < chars.Length; i++)
         {
-            characterSprites[i] = new Sprite[chars.Length];
+            if (chars[i] == null)
+            {
+                Debug.LogError($"chars[{i}]가 할당되지 않았습니다."); // 점검 1
+                continue;
+            }
+
+            // chars[i]가 null이 아니라면 sr도 체크
+            chars[i].sr = chars[i].GetComponent<SpriteRenderer>();
+            if (chars[i].sr == null)
+            {
+                Debug.LogError($"chars[{i}]의 SpriteRenderer가 할당되지 않았습니다. chars[{i}]의 이름: {chars[i].gameObject.name}");  // 점검 2
+                continue;
+            }
+
+            characterSprites[i] = new Sprite[chars.Length]; // 적절한 크기로 초기화
             for (int j = 0; j < chars.Length; j++)
             {
-                characterSprites[i][j] = chars[i].sr.sprite;
+                characterSprites[i][j] = chars[i].sr.sprite; // 동일한 스프라이트를 사용한다고 가정
             }
         }
 
@@ -48,6 +63,8 @@ public class SelectChar : MonoBehaviour
         // 초기 캐릭터 선택 상태 업데이트
         UpdateCharacterSelection();
     }
+
+
 
     void Update()
     {

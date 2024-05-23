@@ -309,8 +309,8 @@ GameObject:
   m_Component:
   - component: {fileID: 18306851}
   - component: {fileID: 18306850}
-  - component: {fileID: 18306849}
   - component: {fileID: 18306848}
+  - component: {fileID: 18306849}
   - component: {fileID: 18306852}
   m_Layer: 0
   m_Name: Green
@@ -1288,9 +1288,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3622717859858016166, guid: 692c3dd8d7cd7204590f9cd60ea1c05c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6135340007987179417, guid: 692c3dd8d7cd7204590f9cd60ea1c05c, type: 3}
       propertyPath: m_Name
       value: Anne 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6935264523387559445, guid: 692c3dd8d7cd7204590f9cd60ea1c05c, type: 3}
+      propertyPath: m_Name
+      value: "1. \uC564 \uC606\uBA74 f2"
       objectReference: {fileID: 0}
     - target: {fileID: 7260958338109818674, guid: 692c3dd8d7cd7204590f9cd60ea1c05c, type: 3}
       propertyPath: m_IsActive
@@ -1324,8 +1332,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1222286468}
   - component: {fileID: 1222286467}
-  - component: {fileID: 1222286466}
   - component: {fileID: 1222286465}
+  - component: {fileID: 1222286466}
   - component: {fileID: 1222286469}
   m_Layer: 0
   m_Name: Blue
