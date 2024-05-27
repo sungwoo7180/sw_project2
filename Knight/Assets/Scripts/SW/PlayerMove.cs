@@ -12,7 +12,6 @@ using System.Collections;
 
         public float dashPower = 15f; // 대쉬 파워 설정
         private bool isDashing = false; // 대쉬 상태인지 확인하는 변수
-
         private bool isMoving = false; // 움직임 상태를 추적합니다.
         public float movePower = 1f;   //move 파워
         public float jumpPower = 3000f;       // 점프 파워 증가
@@ -211,7 +210,13 @@ using System.Collections;
     {
         yield return new WaitForSeconds(1); // 스킬 지속 시간 1초 가정
         // Instantiate 매개 변수 원본 오브젝트, 생성위치, 회전
-        Instantiate(swordTrailEffect, transform.position, Quaternion.identity);  // 검귀 이펙트 생성
+        // Instantiate(swordTrailEffect, transform.position, Quaternion.identity);  
+        // 검귀 이펙트 생성
+        GameObject bullet = Instantiate(swordTrailEffect, transform.position, Quaternion.identity);
+        bullet.transform.localScale = transform.localScale; // 총알의 방향 설정
+        bullet.GetComponent<Bullet>().InitializeBullet(transform.right * transform.localScale.x);
+
+
         isUsingSkill = false;
         animator.SetBool("isUsingSkill", false);
     }

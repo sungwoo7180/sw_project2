@@ -78,3 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
+  distance: 0.5
+  isLayer:
+    serializedVersion: 2
+    m_Bits: 0
