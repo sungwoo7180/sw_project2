@@ -232,7 +232,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3db1f94c2a9c4456ca0c885b6b8736cb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 2
   m_Size: {x: 0.96, y: 0.63}
@@ -317,10 +317,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e8bbfc6223b344991f0e91ed4483a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerType: 0
   maxSpeed: 3
-  jumpPower: 0
+  jumpPower: 3
   coolTime: 0.5
-  pos: {fileID: 0}
+  pos: {fileID: 439632684}
   boxSize: {x: 0, y: 0}
 --- !u!1 &439632683
 GameObject:

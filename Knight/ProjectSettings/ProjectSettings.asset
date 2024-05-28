@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: b26fa467b70d39548affc94e53c97057
+  productGUID: 77139333649cd4f9190b299df8d6544e
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: KnightRun
+  productName: knight - 3
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -629,14 +629,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: KnightRun
+  metroPackageName: knight - 3
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: KnightRun
+  metroApplicationDescription: knight - 3
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -704,11 +704,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 9a926e0b-0d68-40ed-824b-7adee2c75821
+  cloudProjectId: 25cd333b-6cb5-46d7-8aa0-25076ed0e2d0
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Backup_sw 2024-05-21_11-07-51
-  organizationId: ky_jin
+  projectName: knight - 3
+  organizationId: knight1594
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
