@@ -1,0 +1,238 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3719363999825227480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7109915691608655302}
+  - component: {fileID: 8274093956286120990}
+  - component: {fileID: 6624676456842798213}
+  m_Layer: 0
+  m_Name: NativeTouchControlsInterface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7109915691608655302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719363999825227480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8274093956286120990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719363999825227480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9495edb71069ae744ae6fee4f0ae7f2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alwaysShow: 0
+  startHidden: 1
+  enablePlayer2: 0
+  ShowControlsButton:
+    buttonImage: {fileID: 2800000, guid: 4922503daf3cc1c41926f374c92bd805, type: 3}
+    alignment: 7
+    positionOffSet: {x: 0, y: 0}
+    size: 0.3
+  player1TouchInterface:
+    UpArrow:
+      buttonImage: {fileID: 2800000, guid: e4154b20156fea64c865e4402369bfb7, type: 3}
+      alignment: 6
+      positionOffSet: {x: 150, y: -202}
+      size: 0.3
+    DownArrow:
+      buttonImage: {fileID: 2800000, guid: f71f5d84afcb9ef4894900176e1871a6, type: 3}
+      alignment: 6
+      positionOffSet: {x: 150, y: -18}
+      size: 0.3
+    LeftArrow:
+      buttonImage: {fileID: 2800000, guid: 783f262f8260b464d95392d51472c334, type: 3}
+      alignment: 6
+      positionOffSet: {x: 58, y: -110}
+      size: 0.3
+    RightArrow:
+      buttonImage: {fileID: 2800000, guid: d9e2f749dabd0bc47bd804c7aa2521b8, type: 3}
+      alignment: 6
+      positionOffSet: {x: 242, y: -110}
+      size: 0.3
+    Button1:
+      buttonImage: {fileID: 2800000, guid: cfcdbf1db284d4646ba255fa4b09407a, type: 3}
+      alignment: 8
+      positionOffSet: {x: -300, y: -180}
+      size: 0.3
+    Button2:
+      buttonImage: {fileID: 2800000, guid: 3bca31ec39ca0c847a2e43128141123f, type: 3}
+      alignment: 8
+      positionOffSet: {x: -195, y: -180}
+      size: 0.3
+    Button3:
+      buttonImage: {fileID: 2800000, guid: 3d12c96956d99c743bcf460ddd2cac1c, type: 3}
+      alignment: 8
+      positionOffSet: {x: -90, y: -180}
+      size: 0.3
+    Button4:
+      buttonImage: {fileID: 2800000, guid: 853b70f412f51f441b2f81279a45e273, type: 3}
+      alignment: 8
+      positionOffSet: {x: -300, y: -70}
+      size: 0.3
+    Button5:
+      buttonImage: {fileID: 2800000, guid: 408f9edf4abd48643bb63c4672b80034, type: 3}
+      alignment: 8
+      positionOffSet: {x: -195, y: -70}
+      size: 0.3
+    Button6:
+      buttonImage: {fileID: 2800000, guid: 92c37d2d9dff12c4abae7042fae61c9e, type: 3}
+      alignment: 8
+      positionOffSet: {x: -90, y: -70}
+      size: 0.3
+    Pause:
+      buttonImage: {fileID: 2800000, guid: 06863b1d7ac95ae47943365a61319aeb, type: 3}
+      alignment: 2
+      positionOffSet: {x: 0, y: 80}
+      size: 0.3
+  player2TouchInterface:
+    UpArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    DownArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    LeftArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    RightArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button1:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button2:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button3:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button4:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button5:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button6:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Pause:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+--- !u!114 &6624676456842798213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3719363999825227480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9014df29a2bc4c54db3e0f668f26cd8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNum: 0
+  alwaysShow: 0
+  hideControls: 0
+  touchControlsInterface:
+    UpArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    DownArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    LeftArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    RightArrow:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button1:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button2:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button3:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button4:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button5:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Button6:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
+    Pause:
+      buttonImage: {fileID: 0}
+      alignment: 0
+      positionOffSet: {x: 0, y: 0}
+      size: 1
