@@ -9,41 +9,45 @@ public class SelectChar : MonoBehaviour
     public Character character;
     public Image Player1Image;
     public Image Player2Image;
-    public Text Player1Text; // Player 1 ÅØ½ºÆ®
-    public Text Player2Text; // Player 2 ÅØ½ºÆ®
+    public Text Player1Text; // Player 1 ï¿½Ø½ï¿½Æ®
+    public Text Player2Text; // Player 2 ï¿½Ø½ï¿½Æ®
     Animator anim;
     SpriteRenderer sr;
     public SelectChar[] chars;
     private int[] currentIndex = new int[2];
     private bool[] isSelected = new bool[2];
-    private int[] selectedIndex = new int[2] { -1, -1 }; // ¼±ÅÃµÈ Ä³¸¯ÅÍ ÀÎµ¦½º ÀúÀå
-    private Sprite[] characterSprites;
+    private int[] selectedIndex = new int[2] { -1, -1 }; // ï¿½ï¿½ï¿½Ãµï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    private Sprite[][] characterSprites;
 
     void Start()
     {
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
 
-        // characterSprites ¹è¿­ ÃÊ±âÈ­
-        characterSprites = new Sprite[chars.Length];
+        // characterSprites ï¿½è¿­ ï¿½Ê±ï¿½È­
+        characterSprites = new Sprite[chars.Length][];
 
         for (int i = 0; i < chars.Length; i++)
         {
             if (chars[i] == null)
             {
-                Debug.LogError($"chars[{i}]°¡ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù."); // Á¡°Ë 1
+                Debug.LogError($"chars[{i}]ï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½."); // ï¿½ï¿½ï¿½ï¿½ 1
                 continue;
             }
 
-            // chars[i]°¡ nullÀÌ ¾Æ´Ï¶ó¸é srµµ Ã¼Å©
+            // chars[i]ï¿½ï¿½ nullï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ srï¿½ï¿½ Ã¼Å©
             chars[i].sr = chars[i].GetComponent<SpriteRenderer>();
             if (chars[i].sr == null)
             {
-                Debug.LogError($"chars[{i}]ÀÇ SpriteRenderer°¡ ÇÒ´çµÇÁö ¾Ê¾Ò½À´Ï´Ù. chars[{i}]ÀÇ ÀÌ¸§: {chars[i].gameObject.name}");  // Á¡°Ë 2
+                Debug.LogError($"chars[{i}]ï¿½ï¿½ SpriteRendererï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Ò½ï¿½ï¿½Ï´ï¿½. chars[{i}]ï¿½ï¿½ ï¿½Ì¸ï¿½: {chars[i].gameObject.name}");  // ï¿½ï¿½ï¿½ï¿½ 2
                 continue;
             }
 
-            characterSprites[i] = GetCharacterSprite(chars[i]);
+            characterSprites[i] = new Sprite[chars.Length]; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
+            for (int j = 0; j < chars.Length; j++)
+            {
+                characterSprites[i][j] = chars[i].sr.sprite; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´Ù°ï¿½ ï¿½ï¿½ï¿½ï¿½
+            }
         }
 
         for (int i = 0; i < 2; i++)
@@ -52,17 +56,19 @@ public class SelectChar : MonoBehaviour
             isSelected[i] = false;
         }
 
-        // ÅØ½ºÆ® ÃÊ±â À§Ä¡ ¼³Á¤
+        // ï¿½Ø½ï¿½Æ® ï¿½Ê±ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         UpdateText(Player1Text, 0);
         UpdateText(Player2Text, 1);
 
-        // ÃÊ±â Ä³¸¯ÅÍ ¼±ÅÃ »óÅÂ ¾÷µ¥ÀÌÆ®
+        // ï¿½Ê±ï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®
         UpdateCharacterSelection();
     }
 
+
+
     void Update()
     {
-        //player1 player2 Ä³¸¯ÅÍ ¼±ÅÃ ·ÎÁ÷
+        //player1 player2 Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         for (int i = 0; i < 2; i++)
         {
             if (!isSelected[i])
@@ -112,8 +118,9 @@ public class SelectChar : MonoBehaviour
                         UpdateCurrentCharacter(i);
                         UpdateText(Player2Text, i);
                     }
-                    else if (Input.GetKeyDown(KeyCode.Keypad1))
+                    else if (Input.GetKeyDown(KeyCode.Alpha1))
                     {
+                        Debug.Log("ì„ íƒ");
                         SelectCurrentCharacter(i);
                     }
                 }
@@ -151,20 +158,20 @@ public class SelectChar : MonoBehaviour
     void SelectCurrentCharacter(int playerIndex)
     {
         isSelected[playerIndex] = true;
-        selectedIndex[playerIndex] = currentIndex[playerIndex]; // ¼±ÅÃµÈ Ä³¸¯ÅÍ ÀÎµ¦½º ÀúÀå
+        selectedIndex[playerIndex] = currentIndex[playerIndex]; // ï¿½ï¿½ï¿½Ãµï¿½ Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
         if (playerIndex == 0)
         {
-            Player1Image.sprite = characterSprites[currentIndex[playerIndex]];
+            Player1Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
             Player1Image.gameObject.SetActive(true);
         }
         else if (playerIndex == 1)
         {
-            Player2Image.sprite = characterSprites[currentIndex[playerIndex]];
+            Player2Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
             Player2Image.gameObject.SetActive(true);
         }
 
-        // µÎ ¸íÀÇ Ä³¸¯ÅÍ°¡ ¸ðµÎ ¼±ÅÃµÇ¾ú´ÂÁö È®ÀÎ
+        // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÃµÇ¾ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½
         if (isSelected[0] && isSelected[1])
         {
             StartCoroutine(LoadPlayScene());
@@ -173,8 +180,8 @@ public class SelectChar : MonoBehaviour
 
     IEnumerator LoadPlayScene()
     {
-        yield return new WaitForSeconds(5f); // 5ÃÊ ´ë±â
-        SceneManager.LoadScene("play"); // "play" ¾ÀÀ¸·Î ÀÌµ¿
+        yield return new WaitForSeconds(5f); // 5ï¿½ï¿½ ï¿½ï¿½ï¿½
+        SceneManager.LoadScene("play"); // "play" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     }
 
     void OnDeCurrent()
@@ -190,19 +197,5 @@ public class SelectChar : MonoBehaviour
     void UpdateText(Text text, int playerIndex)
     {
         text.transform.position = Camera.main.WorldToScreenPoint(chars[currentIndex[playerIndex]].transform.position);
-    }
-
-    // ´ÙÁß ½ºÇÁ¶óÀÌÆ® Ä³¸¯ÅÍÀÇ ±âº» ½ºÇÁ¶óÀÌÆ®¸¦ ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
-    Sprite GetCharacterSprite(SelectChar character)
-    {
-        MultiSpriteCharacter multiSpriteCharacter = character.GetComponent<MultiSpriteCharacter>();
-        if (multiSpriteCharacter != null)
-        {
-            return multiSpriteCharacter.GetDefaultSprite();
-        }
-        else
-        {
-            return character.sr.sprite;
-        }
     }
 }
