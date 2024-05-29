@@ -152,19 +152,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 17387883}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 3
-  Player1Image: {fileID: 1024923524}
-  Player2Image: {fileID: 914594404}
-  Player1Text: {fileID: 2002299758}
-  Player2Text: {fileID: 1850421698}
-  chars:
-  - {fileID: 686926069}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 17387884}
+  character: 0
+  Player1Image: {fileID: 0}
+  Player2Image: {fileID: 0}
+  Player1Text: {fileID: 0}
+  Player2Text: {fileID: 0}
+  chars: []
 --- !u!95 &17387885
 Animator:
   serializedVersion: 5
@@ -463,19 +459,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 18306846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 2
-  Player1Image: {fileID: 1024923524}
-  Player2Image: {fileID: 914594404}
-  Player1Text: {fileID: 2002299758}
-  Player2Text: {fileID: 1850421698}
-  chars:
-  - {fileID: 686926069}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 17387884}
+  character: 0
+  Player1Image: {fileID: 0}
+  Player2Image: {fileID: 0}
+  Player1Text: {fileID: 0}
+  Player2Text: {fileID: 0}
+  chars: []
 --- !u!1 &64805669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,19 +1011,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 686926061}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   character: 0
-  Player1Image: {fileID: 1024923524}
-  Player2Image: {fileID: 914594404}
-  Player1Text: {fileID: 2002299758}
-  Player2Text: {fileID: 1850421698}
-  chars:
-  - {fileID: 686926069}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 17387884}
+  Player1Image: {fileID: 0}
+  Player2Image: {fileID: 0}
+  Player1Text: {fileID: 0}
+  Player2Text: {fileID: 0}
+  chars: []
 --- !u!1 &802192530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,19 +1474,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1222286463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9963474c83594f248a8cf59d57df7e6f, type: 3}
+  m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 1
-  Player1Image: {fileID: 1024923524}
-  Player2Image: {fileID: 914594404}
-  Player1Text: {fileID: 2002299758}
-  Player2Text: {fileID: 1850421698}
-  chars:
-  - {fileID: 686926069}
-  - {fileID: 1222286469}
-  - {fileID: 18306852}
-  - {fileID: 17387884}
+  character: 0
+  Player1Image: {fileID: 0}
+  Player2Image: {fileID: 0}
+  Player1Text: {fileID: 0}
+  Player2Text: {fileID: 0}
+  chars: []
 --- !u!1 &1566516209
 GameObject:
   m_ObjectHideFlags: 0

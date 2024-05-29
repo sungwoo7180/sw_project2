@@ -115,7 +115,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isDashing", true);
         }
         // 애니메이터의 Grounded 파라미터를 isGrounded 값으로 갱신
-        animator.SetBool("Grounded", isGrounded);
+        //animator.SetBool("Grounded", isGrounded);
 
         // 스킬 사용 입력 처리
         if (Input.GetKeyDown(KeyCode.U))
