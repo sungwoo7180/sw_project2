@@ -1,56 +1,56 @@
+using Goldmetal.UndeadSurvivor;
 using System;
 using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
-    public class PlayerMove : MonoBehaviour
-    {
+public class PlayerMove : MonoBehaviour
+{
 
-        public Transform groundCheck;      // 바닥 감지용 빈 GameObject
-        public float groundCheckRadius;    // 바닥을 체크할 반경
-        public LayerMask groundLayer;      // 바닥으로 취급할 레이어
+    public Transform groundCheck;      // 바닥 감지용 빈 GameObject
+    public float groundCheckRadius;    // 바닥을 체크할 반경
+    public LayerMask groundLayer;      // 바닥으로 취급할 레이어
 
-        public float dashPower = 15f; // 대쉬 파워 설정
-        private bool isDashing = false; // 대쉬 상태인지 확인하는 변수
+    public float dashPower = 15f; // 대쉬 파워 설정
+    private bool isDashing = false; // 대쉬 상태인지 확인하는 변수
+    private bool isMoving = false; // 움직임 상태를 추적합니다.
+    public float movePower = 1f;   //move 파워
+    public float jumpPower = 3000f;       // 점프 파워 증가
 
-        private bool isMoving = false; // 움직임 상태를 추적합니다.
-        public float movePower = 1f;   //move 파워
-        public float jumpPower = 3000f;       // 점프 파워 증가
-        
-        //점프 로직
-        private int jumpCount = 0; // 누적 점프 횟수
-        private bool isGrounded = false; // 바닥에 닿았는지 나타냄
-        private bool isDead = false; // 사망 상태
-        private int maxJump = 2; // 최대 점프 횟수를 설정 (더블 점프)
-        bool isJumping = false;
+    //점프 로직
+    private int jumpCount = 0; // 누적 점프 횟수
+    private bool isGrounded = false; // 바닥에 닿았는지 나타냄
+    private bool isDead = false; // 사망 상태
+    private int maxJump = 2; // 최대 점프 횟수를 설정 (더블 점프)
+    bool isJumping = false;
 
-        private bool isDefending = false; // 방어 상태를 나타내는 변수 추가
+    private bool isDefending = false; // 방어 상태를 나타내는 변수 추가
 
 
-        private Rigidbody2D rigid;          // 사용할 리지드바디 컴포넌트
-        private Animator animator;          // 사용할 애니메이터 컴포넌트
-        private AudioSource playerAudio;     // 사용할 오디오 소스 컴포넌트
-                                             // Start is called before the first frame update
+    private Rigidbody2D rigid;          // 사용할 리지드바디 컴포넌트
+    private Animator animator;          // 사용할 애니메이터 컴포넌트
+    private AudioSource playerAudio;     // 사용할 오디오 소스 컴포넌트
+                                         // Start is called before the first frame update
 
-        // 스킬 로직
-        public GameObject swordTrailEffect;  // 검귀 이펙트 프리팹
-        public Transform pos;
-        private bool isUsingSkill = false; // 스킬 사용 상태
+    // 스킬 로직
+    public GameObject swordTrailEffect;  // 검귀 이펙트 프리팹
+    public Transform pos;
+    private bool isUsingSkill = false; // 스킬 사용 상태
 
 
     private void Start()
-        {
-            // 게임 오브젝트로부터 사용할 컴포터들을 가져와 변수에 할당
-            rigid = gameObject.GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
-            playerAudio = GetComponent<AudioSource>();
+    {
+        // 게임 오브젝트로부터 사용할 컴포터들을 가져와 변수에 할당
+        rigid = gameObject.GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
 
 
-        }
-        void Awake()
-        {
-            rigid = GetComponent<Rigidbody2D>();
-        }
+    }
+    void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -101,7 +101,8 @@ using System.Collections;
                 isDefending = true; // 방어 상태 활성화
                 animator.SetBool("isDefending", true);
             }
-        } else if (isDefending)
+        }
+        else if (isDefending)
         {
             isDefending = false; // 방어 상태 비활성화
             animator.SetBool("isDefending", false);
@@ -162,13 +163,13 @@ using System.Collections;
     }
 
     void Move(Vector2 direction)
-        {
-            rigid.velocity = new Vector2(direction.x * movePower, direction.y * movePower);
-        }
+    {
+        rigid.velocity = new Vector2(direction.x * movePower, direction.y * movePower);
+    }
 
     void Jump()
     {
-        if ( isGrounded && jumpCount < maxJump)
+        if (isGrounded && jumpCount < maxJump)
         {
             Debug.Log("Jumping");
 
@@ -185,7 +186,8 @@ using System.Collections;
         yield return new WaitForSeconds(0.1f); // 짧은 딜레이 후에 다시 점프를 허용
         isGrounded = false;
     }
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.contacts[0].normal.y > 0.7f)
         {
             // isGrounded를 true로 변경하고, 누적 점프 횟수를 0으로 리셋
@@ -211,7 +213,13 @@ using System.Collections;
     {
         yield return new WaitForSeconds(1); // 스킬 지속 시간 1초 가정
         // Instantiate 매개 변수 원본 오브젝트, 생성위치, 회전
-        Instantiate(swordTrailEffect, transform.position, Quaternion.identity);  // 검귀 이펙트 생성
+        // Instantiate(swordTrailEffect, transform.position, Quaternion.identity);  
+        // 검귀 이펙트 생성
+        GameObject bullet = Instantiate(swordTrailEffect, transform.position, Quaternion.identity);
+        bullet.transform.localScale = transform.localScale; // 총알의 방향 설정
+        bullet.GetComponent<Bullet>().InitializeBullet(transform.right * transform.localScale.x);
+
+
         isUsingSkill = false;
         animator.SetBool("isUsingSkill", false);
     }
