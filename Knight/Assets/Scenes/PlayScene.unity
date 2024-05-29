@@ -288,6 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e8bbfc6223b344991f0e91ed4483a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerType: 0
   maxSpeed: 3
   jumpPower: 3
   coolTime: 0.3
@@ -952,19 +953,6 @@ MonoBehaviour:
   isLive: 0
   gameTime: 0
   maxGameTime: 20
-  playerId: 0
-  health: 0
-  maxHealth: 100
-  level: 0
-  kill: 0
-  exp: 0
-  nextExp: 03000000050000000a0000006400000096000000d20000001801000068010000c201000058020000
-  pool: {fileID: 0}
-  player: {fileID: 0}
-  uiLevelUp: {fileID: 0}
-  uiResult: {fileID: 0}
-  uiJoy: {fileID: 0}
-  enemyCleaner: {fileID: 0}
 --- !u!4 &614811747
 Transform:
   m_ObjectHideFlags: 0
@@ -996,7 +984,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &783689351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,7 +1137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &916937632
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -155,12 +155,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
-  Player1Image: {fileID: 0}
-  Player2Image: {fileID: 0}
-  Player1Text: {fileID: 0}
-  Player2Text: {fileID: 0}
-  chars: []
+  character: 3
+  Player1Image: {fileID: 1024923524}
+  Player2Image: {fileID: 914594404}
+  Player1Text: {fileID: 2002299758}
+  Player2Text: {fileID: 1850421698}
+  chars:
+  - {fileID: 686926069}
+  - {fileID: 1222286469}
+  - {fileID: 18306852}
+  - {fileID: 17387884}
 --- !u!95 &17387885
 Animator:
   serializedVersion: 5
@@ -462,12 +466,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
-  Player1Image: {fileID: 0}
-  Player2Image: {fileID: 0}
-  Player1Text: {fileID: 0}
-  Player2Text: {fileID: 0}
-  chars: []
+  character: 2
+  Player1Image: {fileID: 1024923524}
+  Player2Image: {fileID: 914594404}
+  Player1Text: {fileID: 2002299758}
+  Player2Text: {fileID: 1850421698}
+  chars:
+  - {fileID: 686926069}
+  - {fileID: 1222286469}
+  - {fileID: 18306852}
+  - {fileID: 17387884}
 --- !u!1 &64805669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1015,11 +1023,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: 0
-  Player1Image: {fileID: 0}
-  Player2Image: {fileID: 0}
-  Player1Text: {fileID: 0}
-  Player2Text: {fileID: 0}
-  chars: []
+  Player1Image: {fileID: 1024923524}
+  Player2Image: {fileID: 914594404}
+  Player1Text: {fileID: 2002299758}
+  Player2Text: {fileID: 1850421698}
+  chars:
+  - {fileID: 686926069}
+  - {fileID: 1222286469}
+  - {fileID: 18306852}
+  - {fileID: 17387884}
 --- !u!1 &802192530
 GameObject:
   m_ObjectHideFlags: 0
@@ -1477,12 +1489,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f92526f38cee9a41b0d8c419a49ae6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
-  Player1Image: {fileID: 0}
-  Player2Image: {fileID: 0}
-  Player1Text: {fileID: 0}
-  Player2Text: {fileID: 0}
-  chars: []
+  character: 1
+  Player1Image: {fileID: 1024923524}
+  Player2Image: {fileID: 914594404}
+  Player1Text: {fileID: 2002299758}
+  Player2Text: {fileID: 1850421698}
+  chars:
+  - {fileID: 686926069}
+  - {fileID: 1222286469}
+  - {fileID: 18306852}
+  - {fileID: 17387884}
 --- !u!1 &1566516209
 GameObject:
   m_ObjectHideFlags: 0
