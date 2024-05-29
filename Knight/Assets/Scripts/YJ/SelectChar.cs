@@ -17,7 +17,7 @@ public class SelectChar : MonoBehaviour
     private int[] currentIndex = new int[2];
     private bool[] isSelected = new bool[2];
     private int[] selectedIndex = new int[2] { -1, -1 }; // 선택된 캐릭터 인덱스 저장
-    private Sprite[][] characterSprites;
+    private Sprite[] characterSprites;
 
     void Start()
     {
@@ -25,7 +25,7 @@ public class SelectChar : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         // characterSprites 배열 초기화
-        characterSprites = new Sprite[chars.Length][];
+        characterSprites = new Sprite[chars.Length];
 
         for (int i = 0; i < chars.Length; i++)
         {
@@ -43,11 +43,7 @@ public class SelectChar : MonoBehaviour
                 continue;
             }
 
-            characterSprites[i] = new Sprite[chars.Length]; // 적절한 크기로 초기화
-            for (int j = 0; j < chars.Length; j++)
-            {
-                characterSprites[i][j] = chars[i].sr.sprite; // 동일한 스프라이트를 사용한다고 가정
-            }
+            characterSprites[i] = GetCharacterSprite(chars[i]);
         }
 
         for (int i = 0; i < 2; i++)
@@ -63,8 +59,6 @@ public class SelectChar : MonoBehaviour
         // 초기 캐릭터 선택 상태 업데이트
         UpdateCharacterSelection();
     }
-
-
 
     void Update()
     {
@@ -161,12 +155,12 @@ public class SelectChar : MonoBehaviour
 
         if (playerIndex == 0)
         {
-            Player1Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
+            Player1Image.sprite = characterSprites[currentIndex[playerIndex]];
             Player1Image.gameObject.SetActive(true);
         }
         else if (playerIndex == 1)
         {
-            Player2Image.sprite = characterSprites[currentIndex[playerIndex]][playerIndex];
+            Player2Image.sprite = characterSprites[currentIndex[playerIndex]];
             Player2Image.gameObject.SetActive(true);
         }
 
@@ -180,7 +174,7 @@ public class SelectChar : MonoBehaviour
     IEnumerator LoadPlayScene()
     {
         yield return new WaitForSeconds(5f); // 5초 대기
-        SceneManager.LoadScene("PlayScene"); // "play" 씬으로 이동
+        SceneManager.LoadScene("play"); // "play" 씬으로 이동
     }
 
     void OnDeCurrent()
@@ -196,5 +190,19 @@ public class SelectChar : MonoBehaviour
     void UpdateText(Text text, int playerIndex)
     {
         text.transform.position = Camera.main.WorldToScreenPoint(chars[currentIndex[playerIndex]].transform.position);
+    }
+
+    // 다중 스프라이트 캐릭터의 기본 스프라이트를 반환하는 함수
+    Sprite GetCharacterSprite(SelectChar character)
+    {
+        MultiSpriteCharacter multiSpriteCharacter = character.GetComponent<MultiSpriteCharacter>();
+        if (multiSpriteCharacter != null)
+        {
+            return multiSpriteCharacter.GetDefaultSprite();
+        }
+        else
+        {
+            return character.sr.sprite;
+        }
     }
 }
