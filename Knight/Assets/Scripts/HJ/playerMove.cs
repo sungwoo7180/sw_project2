@@ -237,6 +237,7 @@ public class playerMove : MonoBehaviour
         rigid.AddForce(new Vector2(dirc,1) ,ForceMode2D.Impulse);
 
         anim.SetTrigger("isDamage");
+        ///aaa
     }
 
 }
