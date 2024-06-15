@@ -8,7 +8,7 @@ public class SettingsUI : MonoBehaviour
     [SerializeField]
     private Animator animator;
 
-    private void Awke()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
@@ -19,7 +19,7 @@ public class SettingsUI : MonoBehaviour
     }
 
     private IEnumerator CloseAfterDelay()
-    {
+    { 
         animator.SetTrigger("close");
         yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
