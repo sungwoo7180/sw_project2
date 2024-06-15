@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum Character
 {
-    Anne, Blue, Green, Player
+    Anne, Ellen, Player
 }
 public class DataMgr : MonoBehaviour
 {
