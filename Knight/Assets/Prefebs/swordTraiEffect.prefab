@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: swordTraiEffect
       objectReference: {fileID: 0}
+    - target: {fileID: -8653719598885068355, guid: 1c3ff1207936b884ea4adfb0de19eacc, type: 3}
+      propertyPath: m_TagString
+      value: EnemyAttack
+      objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 1c3ff1207936b884ea4adfb0de19eacc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -78,3 +82,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 80
+  distance: 0
+  isLayer:
+    serializedVersion: 2
+    m_Bits: 0

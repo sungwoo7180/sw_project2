@@ -174,7 +174,7 @@ public class SelectChar : MonoBehaviour
     IEnumerator LoadPlayScene()
     {
         yield return new WaitForSeconds(5f); // 5초 대기
-        SceneManager.LoadScene("play"); // "play" 씬으로 이동
+        SceneManager.LoadScene("PlayScene"); // "play" 씬으로 이동
     }
 
     void OnDeCurrent()
