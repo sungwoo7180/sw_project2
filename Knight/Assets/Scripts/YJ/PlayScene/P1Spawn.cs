@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class P1Spawn : MonoBehaviour
 {
     public GameObject[] charPrefabs;
     public GameObject player;
+    
 
     void Start()
     {
@@ -18,11 +20,10 @@ public class P1Spawn : MonoBehaviour
         int index = (int)DataMgr.instance.player2currentCharacter;
         if (index < 0 || index >= charPrefabs.Length)
         {
-            Debug.LogError($"Index out of range: {index }");
+            Debug.LogError($"Index out of range: {index}");
             return;
         }
-
-        player = Instantiate(charPrefabs[(int)DataMgr.instance.player1currentCharacter]);
+        player = Instantiate(charPrefabs[(int)DataMgr.instance.player2currentCharacter]);
         if (player == null)
         {
             Debug.LogError("Failed to instantiate player object.");
