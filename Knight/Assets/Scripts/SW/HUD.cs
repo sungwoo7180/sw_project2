@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +7,7 @@ namespace Goldmetal.UndeadSurvivor
 {
     public class HUD : MonoBehaviour
     {
-        public enum InfoType { P1Health, P2Health, Time }
+        public enum InfoType { Time, Health_1P, Health_2P, Mana_1P, Mana_2P }
         public InfoType type;
 
         Text myText;
@@ -22,47 +21,36 @@ namespace Goldmetal.UndeadSurvivor
 
         void LateUpdate()
         {
-            switch (type)
-            {
-                case InfoType.P1Health:
-                    break;
-                case InfoType.P2Health:
-                    break;
-                case InfoType.Time:
-                    float remainTime = GameManager.instance.maxGameTime - GameManager.instance.gameTime;
-                    int min = Mathf.FloorToInt(remainTime / 60);
-                    int sec = Mathf.FloorToInt(remainTime % 60);
-                    myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
-                    break;
-            } 
-        }
-
-            /*
             switch (type) {
-                case InfoType.Exp:
-                    float curExp = GameManager.instance.exp;
-                    float maxExp = GameManager.instance.nextExp[Mathf.Min(GameManager.instance.level, GameManager.instance.nextExp.Length - 1)];
-                    mySlider.value = curExp / maxExp;
-                    break;
-                case InfoType.Level:
-                    myText.text = string.Format("Lv.{0:F0}", GameManager.instance.level);
-                    break;
-                case InfoType.Kill:
-                    myText.text = string.Format("{0:F0}", GameManager.instance.kill);
-                    break;
                 case InfoType.Time:
                     float remainTime = GameManager.instance.maxGameTime - GameManager.instance.gameTime;
                     int min = Mathf.FloorToInt(remainTime / 60);
                     int sec = Mathf.FloorToInt(remainTime % 60);
                     myText.text = string.Format("{0:D2}:{1:D2}", min, sec);
                     break;
-                case InfoType.Health:
-                    float curHealth = GameManager.instance.health;
-                    float maxHealth = GameManager.instance.maxHealth;
-                    mySlider.value = curHealth / maxHealth;
+                case InfoType.Health_1P:
+                    float curHealth_1P = GameManager.instance.health_P1;
+                    float maxHealth_1P = GameManager.instance.maxHealth_P1;
+                    mySlider.value = curHealth_1P / maxHealth_1P;
                     break;
+                case InfoType.Mana_1P:
+                    float curMana_1P = GameManager.instance.mana_P1;
+                    float maxMana_1P = GameManager.instance.maxMana_P1;
+                    mySlider.value = curMana_1P / maxMana_1P;
+                    break;
+                case InfoType.Health_2P:
+                    float curHealth_2P = GameManager.instance.health_P2;
+                    float maxHealth_2P = GameManager.instance.maxHealth_P2;
+                    mySlider.value = curHealth_2P / maxHealth_2P;
+                    break;
+                case InfoType.Mana_2P:
+                    float curMana_2P = GameManager.instance.mana_P2;
+                    float maxMana_2P = GameManager.instance.maxMana_P2;
+                    mySlider.value = curMana_2P / maxMana_2P;
+                    break;
+
+
             }
-            */
-        
+        }
     }
 }

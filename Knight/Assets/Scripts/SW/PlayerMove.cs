@@ -6,6 +6,15 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public int playerIndex = 1;  // 기본값은 1P로 설정
+
+    // 키 설정을 위한 public 변수들
+    public KeyCode jumpKey = KeyCode.K;
+    public KeyCode attackKey = KeyCode.J;
+    public KeyCode dashKey = KeyCode.L;
+    public KeyCode defendKey = KeyCode.S;
+    public KeyCode skillKey = KeyCode.U;
+    public KeyCode ultimateKey = KeyCode.I;
 
     public Transform groundCheck;      // 바닥 감지용 빈 GameObject
     public float groundCheckRadius;    // 바닥을 체크할 반경
@@ -32,11 +41,15 @@ public class PlayerMove : MonoBehaviour
     private AudioSource playerAudio;     // 사용할 오디오 소스 컴포넌트
                                          // Start is called before the first frame update
 
-    // 스킬 로직
+    // 스킬 로직 변수
     public GameObject swordTrailEffect;  // 검귀 이펙트 프리팹
     public Transform pos;
     private bool isUsingSkill = false; // 스킬 사용 상태
 
+    // 일반 공격 로직 변수
+    private int attackStep = 0;  // 현재 공격 단계
+    private float attackResetTime = 0.5f;  // 연속 공격 입력 대기 시간
+    private Coroutine attackRoutine;
 
     private void Start()
     {
@@ -44,8 +57,29 @@ public class PlayerMove : MonoBehaviour
         rigid = gameObject.GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
+        // Horizontal 축을 기반으로 입력을 받습니다.
 
-
+        // 플레이어 인덱스에 따라 키를 설정합니다.
+        if (playerIndex == 1)
+        {
+            // 1P 키 설정
+            jumpKey = KeyCode.K;
+            attackKey = KeyCode.J;
+            dashKey = KeyCode.L;
+            defendKey = KeyCode.S;
+            skillKey = KeyCode.U;
+            ultimateKey = KeyCode.I;
+        }
+        else if (playerIndex == 2)
+        {
+            // 2P 키 설정
+            jumpKey = KeyCode.Keypad2;
+            attackKey = KeyCode.Keypad1;
+            dashKey = KeyCode.Keypad3;
+            defendKey = KeyCode.DownArrow; // NUM 패드에는 보통 방어 키가 없기 때문에 예를 들어 방향키 아래로 설정
+            skillKey = KeyCode.Keypad4;
+            ultimateKey = KeyCode.Keypad5;
+        }
     }
     void Awake()
     {
@@ -55,10 +89,16 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if (!GameManager.instance.isLive)
+        {
+            return;
+        }
+        
         // 사망시 처리를 더 이상 진행하지 않고 종료
         if (isDead) return;
-
-        float h = Input.GetAxisRaw("Horizontal");
+        string horizontalAxis = playerIndex == 1 ? "Horizontal1" : "Horizontal2";
+        float h = Input.GetAxisRaw(horizontalAxis);
 
         // 이동 상태를 Animator에 반영
         animator.SetFloat("Speed", Mathf.Abs(h));
@@ -74,7 +114,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 점프 입력 처리
-        if (Input.GetKeyDown(KeyCode.K) && jumpCount < maxJump)
+        if (Input.GetKeyDown(jumpKey) && jumpCount < maxJump)
         {
             // 점프 횟수 증가
             jumpCount++;
@@ -86,7 +126,7 @@ public class PlayerMove : MonoBehaviour
             animator.SetBool("isJumping", true);
 
         }
-        else if (Input.GetKeyDown(KeyCode.K) && rigid.velocity.y > 0)
+        else if (Input.GetKeyDown(jumpKey) && rigid.velocity.y > 0)
         {
             // 마우스 왼쪽 버튼에서 손을 떼는 순간 && 속도의 y 값이 양수라면 (위로 상승 중)
             // 현재 속도를 절반으로 변경
@@ -94,7 +134,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 방어 모션 처리
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(defendKey))
         {
             if (!isDefending)
             {
@@ -109,7 +149,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 대쉬 입력 처리
-        if (Input.GetKeyDown(KeyCode.L) && !isDashing)
+        if (Input.GetKeyDown(dashKey) && !isDashing)
         {
             isDashing = true;
             animator.SetBool("isDashing", true);
@@ -118,16 +158,64 @@ public class PlayerMove : MonoBehaviour
         //animator.SetBool("Grounded", isGrounded);
 
         // 스킬 사용 입력 처리
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(skillKey))
         {
             UseSkill();
+        }
+
+        // 기본 공격 입력 처리
+        if (Input.GetKeyDown(attackKey))
+        {
+            HandleAttack();
+        }
+    }
+
+    private void HandleAttack()
+    {
+        if (attackRoutine != null)
+        {
+            StopCoroutine(attackRoutine);
+            attackRoutine = null;
+        }
+
+        attackStep++;
+        if (attackStep > 4)  // 가정: 최대 3단계 공격
+            attackStep = 1;
+
+        animator.SetTrigger("isAttacking");
+        animator.SetInteger("AttackStep", attackStep);
+
+        attackRoutine = StartCoroutine(ResetAttackRoutine());
+    }
+    private IEnumerator ResetAttackRoutine()
+    {
+        yield return new WaitForSeconds(attackResetTime);
+        attackStep = 0;  // 공격 단계 초기화
+        animator.SetInteger("AttackStep", attackStep);
+    }
+    public void PlayAnimation(int atkNum)
+    {
+        //animator.SetFloat("Blend", atkNum);
+        animator.SetTrigger("Atk");
+    }
+
+    IEnumerable ComboAtk()
+    {
+        yield return null; 
+        while(Input.GetKeyDown(attackKey))
+        {
+            
         }
     }
 
     //Physics engine Updates
     void FixedUpdate()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        if (!GameManager.instance.isLive)
+        {
+            return;
+        }
+        //isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         // 대쉬 로직
         if (isDashing)
@@ -147,7 +235,8 @@ public class PlayerMove : MonoBehaviour
 
     void Move()
     {
-        float h = Input.GetAxisRaw("Horizontal");
+        string horizontalAxis = playerIndex == 1 ? "Horizontal1" : "Horizontal2";
+        float h = Input.GetAxisRaw(horizontalAxis);
         Vector2 moveVelocity = new Vector2(h * movePower, rigid.velocity.y);
         rigid.velocity = moveVelocity;
 
@@ -162,10 +251,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    void Move(Vector2 direction)
-    {
-        rigid.velocity = new Vector2(direction.x * movePower, direction.y * movePower);
-    }
 
     void Jump()
     {
@@ -254,8 +339,46 @@ public class PlayerMove : MonoBehaviour
         isDashing = false;
         animator.SetBool("isDashing", false);
     }
-    private void Die()
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(!GameManager.instance.isLive)
+        {
+            return;
+        }
+        // "EnemyAttack" 태그를 가진 객체와만 충돌 시 피해를 입음, 수정 필요.
+        if (collision.gameObject.CompareTag("Player")) 
+        {
+            // 예를 들어, 공격 객체에서 데미지 양을 받아와서 처리
+            float damage = collision.gameObject.GetComponent<AttackProperties>().damage;
+            TakeDamage(damage);
+        }
+
+    }
+    private void TakeDamage(float damage)
     {
 
+        if (playerIndex == 1)
+        {
+            GameManager.instance.health_P1 -= Time.deltaTime * damage;
+            if (GameManager.instance.health_P1 <= 0)
+            {
+                Die();
+            }
+        }
+        else if (playerIndex == 2)
+        {
+            GameManager.instance.health_P2 -= Time.deltaTime * damage;
+            if (GameManager.instance.health_P2 <= 0)
+            {
+                Die();
+            }
+        }
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Dead");
+        
     }
 }
