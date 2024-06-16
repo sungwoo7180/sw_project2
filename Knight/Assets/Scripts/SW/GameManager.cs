@@ -33,6 +33,7 @@ namespace Goldmetal.UndeadSurvivor
         public ESC uiEsc;
         public GameObject uiResult_1PWIN;
         public GameObject uiResult_2PWIN;
+        public GameObject uiResult_Draw;  // 무승부 UI 객체
         //public PlayerMove player_1P;
 
 
@@ -51,8 +52,7 @@ namespace Goldmetal.UndeadSurvivor
 
             //player2PId.gameObject.SetActive(true);
 
-            
-            
+
         }
 
         void Update()
@@ -69,7 +69,7 @@ namespace Goldmetal.UndeadSurvivor
             gameTime += Time.deltaTime;
             Debug.Log("Game Time: " + gameTime); // 이 로그를 통해 gameTime의 증가를 확인
 
-            if (gameTime > maxGameTime)
+            if (gameTime > maxGameTime || health_P1 <= 0 || health_P2 <= 0)
             {
                 gameTime = maxGameTime;
                 GameVictroy();
@@ -96,6 +96,10 @@ namespace Goldmetal.UndeadSurvivor
                 uiResult_1PWIN.SetActive(true); 
             } else if (health_P1 < health_P2) {
                 uiResult_2PWIN.SetActive(true);
+            }
+            else
+            {
+                uiResult_Draw.SetActive(true);
             }
             Stop();
         }

@@ -25,7 +25,7 @@ public class ViewOption : MonoBehaviour
             float refreshRate = (float)refreshRateRatio.numerator / refreshRateRatio.denominator;
 
             // 근사값을 사용하여 120Hz인지 확인
-            if (Mathf.Abs(refreshRate - 120f) < 0.1f)
+            if (Mathf.Abs(refreshRate - 144f) < 0.1f)
             {
                 resolutions.Add(Screen.resolutions[i]);
             }
