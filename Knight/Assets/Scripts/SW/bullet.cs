@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public float distance;  // Raycast 거리
     public LayerMask isLayer;  // Raycast 대상 레이어
 
+    private Rigidbody2D rb;
+
     private Vector2 moveDirection;  // 총알의 이동 방향
 
     public void InitializeBullet(Vector2 dir)
@@ -17,6 +19,8 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         Invoke("DestroyBullet", 1);  // 1초 후에 총알 파괴
 
         // 캐릭터의 방향에 따라 총알의 방향을 설정
@@ -35,6 +39,11 @@ public class Bullet : MonoBehaviour
             {
                 Debug.Log("명중");
                 DestroyBullet();
+                // player 피격 로직 추가
+                // 
+            
+
+
             }
             // 데미지 받는 로직 추가
 

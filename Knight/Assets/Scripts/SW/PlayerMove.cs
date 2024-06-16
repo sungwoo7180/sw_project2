@@ -160,13 +160,17 @@ public class PlayerMove : MonoBehaviour
         // 스킬 사용 입력 처리
         if (Input.GetKeyDown(skillKey))
         {
+            BeginAttack();
             UseSkill();
+            
         }
 
         // 기본 공격 입력 처리
         if (Input.GetKeyDown(attackKey))
         {
+            BeginAttack();
             HandleAttack();
+            
         }
     }
 
@@ -192,6 +196,7 @@ public class PlayerMove : MonoBehaviour
         yield return new WaitForSeconds(attackResetTime);
         attackStep = 0;  // 공격 단계 초기화
         animator.SetInteger("AttackStep", attackStep);
+        EndAttack();
     }
     public void PlayAnimation(int atkNum)
     {
@@ -307,6 +312,7 @@ public class PlayerMove : MonoBehaviour
 
         isUsingSkill = false;
         animator.SetBool("isUsingSkill", false);
+        EndAttack();
     }
     void Dash()
     {
@@ -347,15 +353,15 @@ public class PlayerMove : MonoBehaviour
             return;
         }
         // "EnemyAttack" 태그를 가진 객체와만 충돌 시 피해를 입음, 수정 필요.
-        if (collision.gameObject.CompareTag("Player")) 
+        // 플레이어가 EnemyAttack 태그를 가지고 있고, 충돌 대상이 Player 태그를 가진 경우
+        if (gameObject.tag == "EnemyAttack" && collision.gameObject.CompareTag("Player"))
         {
-            // 예를 들어, 공격 객체에서 데미지 양을 받아와서 처리
-            float damage = collision.gameObject.GetComponent<AttackProperties>().damage;
-            TakeDamage(damage);
+            float damage = 10.0f; // 임의의 데미지 값
+            collision.gameObject.GetComponent<PlayerMove>().TakeDamage(damage);
         }
-
+            
     }
-    private void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
 
         if (playerIndex == 1)
@@ -381,4 +387,14 @@ public class PlayerMove : MonoBehaviour
         animator.SetTrigger("Dead");
         
     }
+    public void BeginAttack()
+    {
+        gameObject.tag = "EnemyAttack";
+    }
+
+    public void EndAttack()
+    {
+        gameObject.tag = "Player";
+    }
+
 }
