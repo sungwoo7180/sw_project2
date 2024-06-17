@@ -12,8 +12,39 @@ public class P1Spawn : MonoBehaviour
 
     void Start()
     {
+<<<<<<< Updated upstream
         player = Instantiate(charPrefabs[(int)DataMgr.instance.player1currentCharacter]);
         player.transform.position = transform.position;
+=======
+        if (charPrefabs == null || charPrefabs.Length == 0)
+        {
+            Debug.LogError("charPrefabs array is not initialized or empty.");
+            return;
+        }
+
+        int index = (int)DataMgr.instance.player2currentCharacter;
+        if (index < 0 || index >= charPrefabs.Length)
+        {
+            Debug.LogError($"Index out of range: {index}");
+            return;
+        }
+        player = Instantiate(charPrefabs[(int)DataMgr.instance.player2currentCharacter]);
+        if (player == null)
+        {
+            Debug.LogError("Failed to instantiate player object.");
+            return;
+        }
+
+        PlayerMove playerMove = player.GetComponent<PlayerMove>();
+        if (playerMove == null)
+        {
+            Debug.LogError("PlayerMove component not found on the instantiated player object.");
+            return;
+        }
+
+        playerMove.playerIndex = 1; // Assuming player 1 configuration
+        playerMove.playerIndex = 3;
+>>>>>>> Stashed changes
     }
 
 

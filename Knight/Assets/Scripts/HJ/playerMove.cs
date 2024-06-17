@@ -11,6 +11,7 @@ public class playerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    public int playerIndex;
 
     void Awake()
     {
@@ -28,7 +29,7 @@ public class playerMove : MonoBehaviour
     void Update()
     {   
 
-        if(playerType == PlayerType.player1currentCharacter){
+        if(playerIndex == 3){
             spriteRenderer.flipX = false;
             //jump
             if((Input.GetKey(KeyCode.W) && !anim.GetBool("isJump"))){
@@ -95,11 +96,11 @@ public class playerMove : MonoBehaviour
                     {
                         Debug.Log(collider.tag);
                     }
-                    anim.SetTrigger("IsDriveKick");
+                    anim.SetTrigger("isJumpKick");
                     curTime = coolTime;
                 }
             }
-            else
+            else if(playerIndex == 4)
             {
                 curTime -= Time.deltaTime;
             }
@@ -170,7 +171,7 @@ public class playerMove : MonoBehaviour
                     {
                         Debug.Log(collider.tag);
                     }
-                    anim.SetTrigger("isDriveKick");
+                    anim.SetTrigger("isJumpKick");
                     curTime = coolTime;
                 }
                 
@@ -223,7 +224,7 @@ public class playerMove : MonoBehaviour
 
     void OnCollisonEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player") {
+        if(collision.gameObject.tag == "Damage") {
             OnDamaged(collision.transform.position);
         }
     }
@@ -238,6 +239,16 @@ public class playerMove : MonoBehaviour
 
         anim.SetTrigger("isDamage");
         ///aaa
+    }
+
+    public void isDamage()
+    {
+        gameObject.tag = "Damage";
+    }
+
+    public void EndAttack()
+    {
+        gameObject.tag = "Player";
     }
 
 }
